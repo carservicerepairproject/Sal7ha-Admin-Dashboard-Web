@@ -1,0 +1,41 @@
+{
+  "topBar": {
+    "helpCenter": "Help Center",
+    "login": "Login",
+    "language": "EN"
+  },
+  "businessOwnerInfo": {
+    "title": "Business Owner Information",
+    "firstName": "Firstname",
+    "firstNamePlaceholder": "John",
+    "surname": "Surname",
+    "surnamePlaceholder": "Doe",
+    "phoneNumber": "Phone Number",
+    "email": "Email",
+    "emailPlaceholder": "example123@gmail.com",
+    "streetAddress": "Street Address",
+    "streetAddressPlaceholder": "Anytown, USA 12345",
+    "country": "Country",
+    "countryPlaceholder": "United States",
+    "city": "City",
+    "cityPlaceholder": "New York"
+  },
+  "businessInfo": {
+    "title": "Business Information",
+    "businessName": "Business Name",
+    "businessNamePlaceholder": "Car Service Business Name",
+    "businessEmail": "Business Email",
+    "businessEmailPlaceholder": "example123@gmail.com",
+    "businessPhone": "Business Phone Number",
+    "businessStreetAddress": "Business Street Address",
+    "businessStreetAddressPlaceholder": "Anytown, USA 12345",
+    "businessCountry": "Business Country",
+    "businessCountryPlaceholder": "United States",
+    "businessCity": "Business City",
+    "businessCityPlaceholder": "New York",
+    "crn": "Commercial Registration Number",
+    "crnPlaceholder": "CRN-123456789",
+    "tin": "Tax Identification Number",
+    "tinPlaceholder": "TIN-987654321"
+  }
+}

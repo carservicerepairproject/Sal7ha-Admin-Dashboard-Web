@@ -1,0 +1,41 @@
+{
+  "topBar": {
+    "helpCenter": "مركز المساعدة",
+    "login": "تسجيل الدخول",
+    "language": "ع"
+  },
+  "businessOwnerInfo": {
+    "title": "معلومات مالك العمل",
+    "firstName": "الاسم الأول",
+    "firstNamePlaceholder": "جون",
+    "surname": "اسم العائلة",
+    "surnamePlaceholder": "دو",
+    "phoneNumber": "رقم الهاتف",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "example123@gmail.com",
+    "streetAddress": "عنوان الشارع",
+    "streetAddressPlaceholder": "أي تاون، الولايات المتحدة 12345",
+    "country": "البلد",
+    "countryPlaceholder": "الولايات المتحدة",
+    "city": "المدينة",
+    "cityPlaceholder": "نيويورك"
+  },
+  "businessInfo": {
+    "title": "معلومات العمل",
+    "businessName": "اسم العمل",
+    "businessNamePlaceholder": "اسم شركة خدمات السيارات",
+    "businessEmail": "البريد الإلكتروني للعمل",
+    "businessEmailPlaceholder": "example123@gmail.com",
+    "businessPhone": "رقم هاتف العمل",
+    "businessStreetAddress": "عنوان العمل",
+    "businessStreetAddressPlaceholder": "أي تاون، الولايات المتحدة 12345",
+    "businessCountry": "بلد العمل",
+    "businessCountryPlaceholder": "الولايات المتحدة",
+    "businessCity": "مدينة العمل",
+    "businessCityPlaceholder": "نيويورك",
+    "crn": "رقم السجل التجاري",
+    "crnPlaceholder": "CRN-123456789",
+    "tin": "رقم التعريف الضريبي",
+    "tinPlaceholder": "TIN-987654321"
+  }
+}

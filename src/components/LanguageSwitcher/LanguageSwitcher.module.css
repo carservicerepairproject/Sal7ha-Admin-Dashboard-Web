@@ -1,0 +1,52 @@
+.wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.wrapper img {
+    width: 1rem;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 10px;
+  transition: background-color 0.2s ease;
+}
+
+.currentLocale {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.dropdown {
+  position: absolute;
+  top: 110%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 10;
+}
+
+.option {
+  padding: 8px 12px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #f0f0f0;
+}
+
+.active {
+  background-color: #e8e8e8;
+  font-weight: bold;
+}
+
+.rotate {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}

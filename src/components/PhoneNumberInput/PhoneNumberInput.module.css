@@ -1,0 +1,104 @@
+.phoneNumberInputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.phoneNumberInputContainer span {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 3px;
+  padding: 0.3rem 1rem;
+  border: 2px solid #eaeaea;
+  background-color: #eaeaea;
+  gap: 10px;
+  transition: border-color 0.2s ease;
+}
+
+
+
+.inputContainer:focus-within {
+  border-color: var(--selective-yellow);
+}
+
+.inputContainer:focus-within .icon {
+  color: var(--selective-yellow);
+}
+
+.phoneInput {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none !important;
+  background: transparent !important;
+}
+
+.inputField {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  font-size: 0.7rem;
+  width: 100%;
+}
+
+/* Target the country selector button to remove border */
+.phoneInputContainer
+  :global(.react-international-phone-country-selector-button) {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  outline: none !important;
+}
+
+/* Remove border when button is focused */
+.phoneInputContainer
+  :global(.react-international-phone-country-selector-button:focus) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Style the input container */
+.phoneInputContainer :global(.react-international-phone-input-container) {
+  flex: 1;
+}
+
+/* Style the actual input field */
+.phoneInputContainer :global(.react-international-phone-input) {
+  width: 100%;
+  font-size: 0.7rem;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+/* Remove border from country selector dropdown */
+.phoneInputContainer :global(.react-international-phone-country-selector) {
+  border: none !important;
+}
+
+/* Style the flag */
+.phoneInputContainer :global(.react-international-phone-flag) {
+  border-radius: 50%;
+  transform: scale(1.1);
+}
+
+/* Remove any default button styling */
+.phoneInputContainer
+  :global(.react-international-phone-country-selector-button__button-content) {
+  border: none !important;
+}
+
+/* Target the dropdown arrow if you want to hide or style it */
+.phoneInputContainer
+  :global(.react-international-phone-country-selector-button__dropdown-arrow) {
+  /* You can hide it: display: none; */
+  /* Or style it as needed */
+}

@@ -1,0 +1,31 @@
+.buttonContainer {
+  font-family: var(--font-inter);
+  font-size: 0.7rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 1.5px solid black;
+  border-radius: 3px;
+  background-color: white;
+  padding: 10px 20px;
+  color: var(--deep-teal-blue);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 2px;
+}
+
+.buttonContainer:hover {
+  background-color: var(--selective-yellow);
+  border: 1.5px solid var(--selective-yellow);
+  color: white;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #f2f2f2;
+  color: gray;
+  border-color: #ccc;
+}

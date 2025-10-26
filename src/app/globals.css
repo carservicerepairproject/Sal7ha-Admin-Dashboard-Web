@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-inter);
+}
+:root {
+  /* COLORS */
+  --selective-yellow: #ffb700;
+  --dark-gray: #1a1a1a;
+  --jet: #2a2929;
+  --black-olive: #444342;
+  --deep-teal-blue: #1e3a46;
+  --carcoal-teal: #182b31;
+  --state-blue-gray: #58717d;
+  --pale-steel-gray: #b4c3cc;
+  --midnight-black-blue: #0a0e14;
+  --ice-white: #f4fefe;
+
+  /* FONTS */
+  --font-bebas: "Bebas Neue", sans-serif;
+  --font-inter: "Inter", sans-serif;
+}

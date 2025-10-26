@@ -1,0 +1,35 @@
+.inputContainer {
+  display: flex;
+  width: 100%;
+  border: 2px solid lightgray;
+  border-radius: 3px;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  transition: border-color 0.2s ease;
+}
+
+.inputContainer:focus-within {
+  border-color: var(--selective-yellow);
+}
+
+.inputField {
+  font-size: 0.7rem;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.errorBorder {
+  border-color: red;
+}
+
+.icon {
+  font-size: 0.9rem;
+  color: lightgray;
+  transition: color 0.2s ease;
+}
+
+.inputContainer:focus-within .icon {
+  color: var(--selective-yellow);
+}

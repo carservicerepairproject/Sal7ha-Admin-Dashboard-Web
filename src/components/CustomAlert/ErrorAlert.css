@@ -1,0 +1,19 @@
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  gap: 0.4rem;
+}
+
+
+.alert-icon {
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  color: red;
+}
+
+.alert-text {
+  display: inline-block;
+  color: red;
+}
