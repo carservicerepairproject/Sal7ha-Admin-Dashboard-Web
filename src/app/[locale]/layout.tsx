@@ -23,7 +23,6 @@ export default async function RootLayout({
 }) {
   const { locale } = await params;
 
-  // ✅ Load the correct messages JSON dynamically
   const messages = (await import(`../../../messages/${locale}.json`)).default;
 
   return (

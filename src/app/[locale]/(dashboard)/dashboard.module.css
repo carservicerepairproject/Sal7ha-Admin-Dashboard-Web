@@ -1,0 +1,56 @@
+.screen {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.section {
+  width: 100%;
+  height: 100%;
+  background-color: #f4f4f4;
+  padding: 1rem 0.5rem 1rem 0.5rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: 2px solid #d9d9d9;
+  border-radius: 0.5rem;
+  gap: 1rem;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  padding: 1.5rem;
+}
+
+.topBar h1 {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.icons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon {
+  padding: 0.5rem;
+  border: 1px solid lightgray;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.children {
+  padding:1rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}

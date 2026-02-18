@@ -1,0 +1,98 @@
+.serviceName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.serviceName img {
+  border-radius: 0.2rem;
+}
+
+.progress {
+  background-color: #ccad00;
+  color: white;
+  font-size: 0.7rem;
+  padding: 0.3rem 0rem;
+  border-radius: 1rem;
+}
+
+.icons {
+  display: flex;
+  gap: 0.2rem;
+  justify-content: center;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: black;
+  padding: 0.3rem;
+  border: 2px solid #d9d9d9;
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.icon:hover {
+  background-color: #f5f5f5;
+}
+
+.icon:focus,
+.icon:active {
+  outline: none;
+  border: none;
+}
+
+
+.icon svg {
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+}
+
+/* Dropdown Menu Styles - Fixed Position */
+.dropdown {
+  position: fixed;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 10rem;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdownItem {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  color: #333;
+  outline: none;
+}
+
+.dropdownItem:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdownItem:focus {
+  outline: none;
+}
+
+.dropdownItem.danger {
+  color: #dc2626;
+}
+
+.dropdownItem.danger:hover {
+  background-color: #fee2e2;
+}

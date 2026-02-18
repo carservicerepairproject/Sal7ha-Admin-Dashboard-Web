@@ -1,0 +1,35 @@
+.status {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+
+.status svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.inProgress {
+  color: #038efd;
+  background-color: rgb(from #038efd r g b / 0.1);
+}
+
+.completed {
+  color: #3ac167;
+  background-color: rgb(from #3ac167 r g b / 0.1);
+}
+
+.pending {
+  color: #e68f3d;
+  background-color: rgb(from #e68f3d r g b / 0.1);
+}
+
+.canceled {
+  color: #ef685d;
+  background-color: rgb(from #ef685d r g b / 0.1);
+}

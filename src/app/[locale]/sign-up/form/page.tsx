@@ -134,6 +134,9 @@ export default function SignUpView() {
             </div>
           </div>
         </div>
+        <div>
+          
+        </div>
       </div>
     </section>
   );

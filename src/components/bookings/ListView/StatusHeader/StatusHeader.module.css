@@ -1,0 +1,57 @@
+.status {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.7rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+.bar {
+  height: 0.75rem;
+  border-radius: 0.5rem;
+  width: 2px;
+}
+
+.inProgress .bar {
+  background-color: #038efd;
+}
+
+.completed .bar {
+  background-color: #3ac167;
+}
+
+.pending .bar {
+  background-color: #e68f3d;
+}
+
+.canceled .bar {
+  background-color: #ef685d;
+}
+
+.status svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.inProgress {
+  color: black;
+  background-color: rgb(from #038efd r g b / 0.1);
+}
+
+.completed {
+  color: black;
+  background-color: rgb(from #3ac167 r g b / 0.1);
+}
+
+.pending {
+  color: black;
+  background-color: rgb(from #e68f3d r g b / 0.1);
+}
+
+.canceled {
+  color: black;
+  background-color: rgb(from #ef685d r g b / 0.1);
+}
