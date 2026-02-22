@@ -13,16 +13,7 @@ import {
   InProgressComponent,
   PendingComponent,
 } from "@/components/common/StatusComponent/StatusComponent";
-
-interface Booking {
-  id: string;
-  serviceName: string;
-  serviceIcon: string;
-  carType: string;
-  startDate: string;
-  endDate: string;
-  status: string;
-}
+import Booking from "@/app/domain/entities/Booking";
 
 const STATUS_GROUPS = [
   { key: "Pending", label: "Pending" },

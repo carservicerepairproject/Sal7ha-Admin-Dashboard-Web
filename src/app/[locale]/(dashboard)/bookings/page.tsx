@@ -1,17 +1,20 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./bookings.module.css";
 import { HiOutlineTableCells } from "react-icons/hi2";
-import { IoIosArrowDown } from "react-icons/io";
 import { FaSortAmountDown } from "react-icons/fa";
 import { FiFilter } from "react-icons/fi";
 import { CgExport } from "react-icons/cg";
 import { RiSearch2Line } from "react-icons/ri";
 import { BsKanban } from "react-icons/bs";
 import { FaListUl } from "react-icons/fa";
+import { FaSortAlphaDown } from "react-icons/fa";
 import TableView from "@/components/bookings/TableView/TableView";
 import ListView from "@/components/bookings/ListView/ListView";
+import DropdownButton from "@/components/common/DropdownButton/DropdownButton";
+import { DropdownOption } from "@/components/common/DropdownButton/DropdownButton";
+import OverlayBookingDetails from "@/components/bookings/OverlayBookingDetails/OverlayBookingDetails";
 
 interface Booking {
   id: string;
@@ -23,10 +26,18 @@ interface Booking {
   status: string;
 }
 
-const VIEW_OPTIONS = [
+const VIEW_OPTIONS: DropdownOption[] = [
   { label: "Table View", icon: <HiOutlineTableCells /> },
   { label: "Kanban View", icon: <BsKanban /> },
   { label: "List View", icon: <FaListUl /> },
+];
+
+const FILTER_OPTIONS: DropdownOption[] = [
+  { label: "Alphabetically", icon: <FaSortAlphaDown /> },
+];
+
+const SORT_OPTIONS: DropdownOption[] = [
+  { label: "Ascending", icon: <FaSortAmountDown /> },
 ];
 
 const generateMockData = (): Booking[] => {
@@ -60,7 +71,7 @@ const generateMockData = (): Booking[] => {
 
   const bookings: Booking[] = [];
 
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 25; i++) {
     const service = services[Math.floor(Math.random() * services.length)];
     const carType = carTypes[Math.floor(Math.random() * carTypes.length)];
     const status = statuses[Math.floor(Math.random() * statuses.length)];
@@ -73,10 +84,10 @@ const generateMockData = (): Booking[] => {
       id: Math.random().toString(36).substring(2, 8).toUpperCase(),
       serviceName: service.name,
       serviceIcon: service.icon,
-      carType: carType,
+      carType,
       startDate: `${startDay} ${startDayNum}`,
       endDate: `${endDay} ${endDayNum}`,
-      status: status,
+      status,
     });
   }
 
@@ -86,22 +97,15 @@ const generateMockData = (): Booking[] => {
 export default function BookingsView() {
   const [showStats, setShowStats] = useState(false);
   const [bookings] = useState<Booking[]>(generateMockData());
-  const [viewDropdownOpen, setViewDropdownOpen] = useState(false);
-  const [selectedView, setSelectedView] = useState(VIEW_OPTIONS[0]);
-  const viewSwitcherRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        viewSwitcherRef.current &&
-        !viewSwitcherRef.current.contains(e.target as Node)
-      ) {
-        setViewDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const [selectedView, setSelectedView] = useState<DropdownOption>(
+    VIEW_OPTIONS[0],
+  );
+  const [selectedFilter, setSelectedFilter] = useState<DropdownOption>(
+    FILTER_OPTIONS[0],
+  );
+  const [selectedSort, setSelectedSort] = useState<DropdownOption>(
+    SORT_OPTIONS[0],
+  );
 
   const renderView = () => {
     switch (selectedView.label) {
@@ -118,51 +122,26 @@ export default function BookingsView() {
     <div className={styles.section}>
       <div className={styles.tools}>
         <div className={styles.toolsLeft}>
-          {/* View Switcher Dropdown */}
-          <div className={styles.viewSwitcherWrapper} ref={viewSwitcherRef}>
-            <div
-              className={styles.viewSwitcher}
-              onClick={() => setViewDropdownOpen((prev) => !prev)}
-            >
-              {selectedView.icon}
-              <span>{selectedView.label}</span>
-              <IoIosArrowDown
-                className={`${styles.viewArrow} ${viewDropdownOpen ? styles.viewArrowOpen : ""}`}
-              />
-            </div>
-
-            {viewDropdownOpen && (
-              <div className={styles.viewDropdown}>
-                {VIEW_OPTIONS.map((option) => (
-                  <div
-                    key={option.label}
-                    className={`${styles.viewDropdownItem} ${
-                      selectedView.label === option.label
-                        ? styles.viewDropdownItemActive
-                        : ""
-                    }`}
-                    onClick={() => {
-                      setSelectedView(option);
-                      setViewDropdownOpen(false);
-                    }}
-                  >
-                    {option.icon}
-                    <span>{option.label}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
+          <DropdownButton
+            options={VIEW_OPTIONS}
+            selected={selectedView}
+            onSelect={setSelectedView}
+          />
           <div className={styles.separator} />
-          <div className={styles.actionButton}>
-            <FiFilter />
-            <span>Filter</span>
-          </div>
-          <div className={styles.actionButton}>
-            <FaSortAmountDown />
-            <span>Sort</span>
-          </div>
+          <DropdownButton
+            options={FILTER_OPTIONS}
+            selected={selectedFilter}
+            onSelect={setSelectedFilter}
+            fixedLabel="Filter"
+            fixedIcon={<FiFilter />}
+          />
+          <DropdownButton
+            options={SORT_OPTIONS}
+            selected={selectedSort}
+            onSelect={setSelectedSort}
+            fixedLabel="Sort"
+            fixedIcon={<FaSortAmountDown />}
+          />
           <div className={styles.separator} />
           <div
             className={styles.showStats}
@@ -176,6 +155,7 @@ export default function BookingsView() {
             </div>
           </div>
         </div>
+
         <div className={styles.toolsRight}>
           <div className={styles.searchBar}>
             <RiSearch2Line />
@@ -188,8 +168,6 @@ export default function BookingsView() {
           </div>
         </div>
       </div>
-
-      {/* View Content */}
       {renderView()}
     </div>
   );

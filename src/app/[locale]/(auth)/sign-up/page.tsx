@@ -20,7 +20,6 @@ export default function signUpView() {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
 
-  // Validation Requirements
   const checkList = React.useMemo<PasswordChecklist>(
     () => Validation.passwordChecklist(password),
     [password]

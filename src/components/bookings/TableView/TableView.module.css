@@ -1,7 +1,7 @@
 .table {
   width: 100%;
   flex: 1;
-  min-height: 0;
+  min-height: 20rem;
   border: 1px solid lightgray;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
@@ -76,6 +76,8 @@
 }
 
 .checkBox[type="checkbox"] {
+  width: 0.9rem;
+  height: 0.9rem;
   accent-color: var(--selective-yellow);
 }
 
@@ -88,6 +90,12 @@
   font-weight: 500;
   cursor: pointer;
   vertical-align: middle;
+}
+
+.services {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .serviceName {

@@ -11,16 +11,8 @@ import {
   CanceledComponent,
   CompletedComponent,
 } from "@/components/common/StatusComponent/StatusComponent";
-
-interface Booking {
-  id: string;
-  serviceName: string;
-  serviceIcon: string;
-  carType: string;
-  startDate: string;
-  endDate: string;
-  status: string;
-}
+import OverlayBookingDetails from "../OverlayBookingDetails/OverlayBookingDetails";
+import Booking from "@/app/domain/entities/Booking";
 
 const renderStatusComponent = (status: string) => {
   switch (status) {
@@ -49,10 +41,10 @@ export default function TableView({ bookings }: TableViewProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [goToPageInput, setGoToPageInput] = useState("");
+  const [openBooking, setOpenBooking] = useState<Booking | null>(null);
 
   const totalItems = bookings.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentBookings = bookings.slice(indexOfFirstItem, indexOfLastItem);
@@ -66,7 +58,8 @@ export default function TableView({ bookings }: TableViewProps) {
     setIsChecked(!isChecked);
   };
 
-  const handleSelectBooking = (id: string) => {
+  const handleSelectBooking = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
     const newSelected = new Set(selectedBookings);
     if (newSelected.has(id)) {
       newSelected.delete(id);
@@ -104,41 +97,31 @@ export default function TableView({ bookings }: TableViewProps) {
 
   const getPageNumbers = () => {
     const pages: (number | string)[] = [];
-
     if (totalPages <= 5) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
     } else {
       pages.push(1);
-
-      if (currentPage > 3) {
-        pages.push("...");
-      }
-
+      if (currentPage > 3) pages.push("...");
       const start = Math.max(2, currentPage - 1);
       const end = Math.min(totalPages - 1, currentPage + 1);
-
       for (let i = start; i <= end; i++) {
-        if (!pages.includes(i)) {
-          pages.push(i);
-        }
+        if (!pages.includes(i)) pages.push(i);
       }
-
-      if (currentPage < totalPages - 2) {
-        pages.push("...");
-      }
-
-      if (!pages.includes(totalPages)) {
-        pages.push(totalPages);
-      }
+      if (currentPage < totalPages - 2) pages.push("...");
+      if (!pages.includes(totalPages)) pages.push(totalPages);
     }
-
     return pages;
   };
 
   return (
     <>
+      {openBooking && (
+        <OverlayBookingDetails
+          booking={openBooking}
+          onClose={() => setOpenBooking(null)}
+        />
+      )}
+
       {/* Table */}
       <table className={styles.table}>
         <thead>
@@ -164,9 +147,8 @@ export default function TableView({ bookings }: TableViewProps) {
           {currentBookings.map((booking) => (
             <tr
               key={booking.id}
-              className={
-                selectedBookings.has(booking.id) ? styles.isSelected : ""
-              }
+              className={`${styles.clickableRow} ${selectedBookings.has(booking.id) ? styles.isSelected : ""}`}
+              onClick={() => setOpenBooking(booking)}
             >
               <td>
                 <div className={styles.idColumn}>
@@ -174,15 +156,18 @@ export default function TableView({ bookings }: TableViewProps) {
                     className={styles.checkBox}
                     type="checkbox"
                     checked={selectedBookings.has(booking.id)}
-                    onChange={() => handleSelectBooking(booking.id)}
+                    onChange={() => {}}
+                    onClick={(e) => handleSelectBooking(booking.id, e)}
                   />
                   {booking.id}
                 </div>
               </td>
               <td>
-                <div className={styles.serviceName}>
-                  <img src={booking.serviceIcon} alt="" />
-                  <p>{booking.serviceName}</p>
+                <div className={styles.services}>
+                  <div className={styles.serviceName}>
+                    <img src={booking.serviceIcon} alt="" />
+                    <p>{booking.serviceName}</p>
+                  </div>
                 </div>
               </td>
               <td>{booking.carType}</td>
@@ -194,18 +179,17 @@ export default function TableView({ bookings }: TableViewProps) {
           ))}
         </tbody>
       </table>
+
       <SelectionToolBar
         selectedCount={selectedBookings.size}
         onClearSelection={() => {
           setSelectedBookings(new Set());
           setIsChecked(false);
         }}
-        onDelete={() => {
-          console.log("Delete", [...selectedBookings]);
-        }}
-        onChangeStatus={(status) => {
-          console.log("Change to", status, [...selectedBookings]);
-        }}
+        onDelete={() => console.log("Delete", [...selectedBookings])}
+        onChangeStatus={(status) =>
+          console.log("Change to", status, [...selectedBookings])
+        }
       />
 
       {/* Pagination */}
@@ -226,19 +210,15 @@ export default function TableView({ bookings }: TableViewProps) {
           <div className={styles.icon} onClick={goToPreviousPage}>
             <MdKeyboardArrowLeft />
           </div>
-
           {getPageNumbers().map((page, index) => (
             <div
               key={index}
-              className={`${styles.pageNumber} ${
-                page === currentPage ? styles.activePage : ""
-              } ${page === "..." ? styles.dots : ""}`}
+              className={`${styles.pageNumber} ${page === currentPage ? styles.activePage : ""} ${page === "..." ? styles.dots : ""}`}
               onClick={() => typeof page === "number" && setCurrentPage(page)}
             >
               {page}
             </div>
           ))}
-
           <div className={styles.icon} onClick={goToNextPage}>
             <MdKeyboardArrowRight />
           </div>
