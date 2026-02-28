@@ -1,35 +1,25 @@
-.table {
+.tableWrapper {
   width: 100%;
-  flex: 1;
-  min-height: 20rem;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 70vh;
   border: 1px solid lightgray;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
+}
+
+.table {
+  min-width: 90rem;
+  width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  display: table;
 }
 
 .table thead {
-  display: block;
-  width: 100%;
-}
-
-.table tbody {
-  display: block;
-  width: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  flex: 1;
-}
-
-.table thead tr,
-.table tbody tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .idColumn {
@@ -55,14 +45,24 @@
 .table th,
 .table td {
   text-align: left;
-  padding: 0.7rem 1rem;
+  padding: 0.5rem 1rem;
   border-right: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
+  min-width: 8rem;
+}
+.table th:nth-child(1),
+.table td:nth-child(1) {
+  min-width: 4rem;
 }
 
 .table th:nth-child(2),
 .table td:nth-child(2) {
-  width: 25%;
+  width: 20%;
+}
+.table th:nth-child(7),
+.table td:nth-child(7) {
+  width: 1%;
+  white-space: nowrap;
 }
 
 .table th:last-child,
@@ -79,10 +79,6 @@
   width: 0.9rem;
   height: 0.9rem;
   accent-color: var(--selective-yellow);
-}
-
-.table tbody {
-  vertical-align: top;
 }
 
 .table td {
@@ -108,13 +104,22 @@
   border-radius: 0.3rem;
 }
 
-.table tbody::-webkit-scrollbar {
+.tableWrapper::-webkit-scrollbar {
   display: none;
 }
 
-.table tbody {
+.tableWrapper {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.clickableRow:hover {
+  background-color: #f8f9fb;
+}
+
+.isSelected {
+  box-shadow: inset 2px 0 0 0 var(--selective-yellow);
+  background-color: rgb(from var(--selective-yellow) r g b / 0.1);
 }
 
 .pagination {
@@ -212,9 +217,4 @@
 .dots:hover {
   background-color: transparent;
   border: none;
-}
-
-.isSelected {
-  box-shadow: inset 2px 0 0 0 var(--selective-yellow);
-  background-color: rgb(from var(--selective-yellow) r g b / 0.1);
 }

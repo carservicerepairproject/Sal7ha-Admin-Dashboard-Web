@@ -2,6 +2,7 @@ import "../globals.css";
 import { Bebas_Neue, Inter } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { NextIntlClientProvider } from "next-intl";
+import { BusinessSignUpProvider } from "@/infrastructure/context/business-signup.context";
 
 const bebas = Bebas_Neue({
   weight: "400",
@@ -30,7 +31,7 @@ export default async function RootLayout({
       <body>
         <AppRouterCacheProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            {children}
+            <BusinessSignUpProvider>{children}</BusinessSignUpProvider>
           </NextIntlClientProvider>
         </AppRouterCacheProvider>
       </body>

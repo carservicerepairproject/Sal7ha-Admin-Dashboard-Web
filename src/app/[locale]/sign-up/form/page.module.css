@@ -36,20 +36,21 @@
   background-color: white;
   display: flex;
   justify-content: space-between;
-  padding: 2rem;
-  height: 6rem;
+  padding: 1rem 1.5rem;
+  height: 5rem;
 }
 
 .topBar img {
-  width: 12rem;
+  width: 9rem;
 }
 
 .topBarItems {
   display: flex;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.85rem;
   gap: 2rem;
 }
+
 
 .language {
   width: 1rem;
@@ -60,12 +61,13 @@
   background-color: white;
   display: flex;
   flex-direction: column;
+  padding: 2rem;
+  border-top: 1rem solid var(--selective-yellow);
 }
 
 .formSections {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
   gap: 2rem;
 }
 
@@ -83,20 +85,16 @@
 
 
 .formSection h1 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
-.topDesign {
-  width: 100%;
-  height: 1rem;
-  background-color: var(--selective-yellow);
-}
+
 
 .formRow {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   gap: 1rem;
-  direction: inherit; /* Ensures grid respects parent's direction */
+  direction: inherit;
 }

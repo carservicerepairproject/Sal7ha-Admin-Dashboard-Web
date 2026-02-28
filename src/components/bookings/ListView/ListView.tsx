@@ -13,7 +13,7 @@ import {
   InProgressComponent,
   PendingComponent,
 } from "@/components/common/StatusComponent/StatusComponent";
-import Booking from "@/app/domain/entities/Booking";
+import Booking from "@/domain/entities/Booking";
 
 const STATUS_GROUPS = [
   { key: "Pending", label: "Pending" },

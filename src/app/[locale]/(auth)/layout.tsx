@@ -3,6 +3,7 @@
 
 import React from "react";
 import styles from "./auth.module.css";
+import { BusinessSignUpProvider } from "@/infrastructure/context/business-signup.context";
 
 export default function AuthLayout({
   children,
@@ -22,8 +23,7 @@ export default function AuthLayout({
           </h2>
         </div>
       </div>
-
-      <div>{children}</div>
+      {children}
     </div>
   );
 }

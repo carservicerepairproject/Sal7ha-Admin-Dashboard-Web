@@ -12,7 +12,9 @@ import {
   CompletedComponent,
 } from "@/components/common/StatusComponent/StatusComponent";
 import OverlayBookingDetails from "../OverlayBookingDetails/OverlayBookingDetails";
-import Booking from "@/app/domain/entities/Booking";
+import Booking from "@/domain/entities/Booking";
+import { Columns } from "lucide-react";
+import ColumnSelectionBar from "../ColumnSelectionBar/ColumnSelectionBar";
 
 const renderStatusComponent = (status: string) => {
   switch (status) {
@@ -123,63 +125,67 @@ export default function TableView({ bookings }: TableViewProps) {
       )}
 
       {/* Table */}
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th className={styles.idColumn}>
-              <input
-                className={styles.checkBox}
-                type="checkbox"
-                checked={isChecked}
-                onChange={handleSelectAll}
-              />
-              ID
-            </th>
-            <th>Service Name</th>
-            <th>Car Type</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Status</th>
-            <th className={styles.addColumn}>+</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentBookings.map((booking) => (
-            <tr
-              key={booking.id}
-              className={`${styles.clickableRow} ${selectedBookings.has(booking.id) ? styles.isSelected : ""}`}
-              onClick={() => setOpenBooking(booking)}
-            >
-              <td>
-                <div className={styles.idColumn}>
-                  <input
-                    className={styles.checkBox}
-                    type="checkbox"
-                    checked={selectedBookings.has(booking.id)}
-                    onChange={() => {}}
-                    onClick={(e) => handleSelectBooking(booking.id, e)}
-                  />
-                  {booking.id}
-                </div>
-              </td>
-              <td>
-                <div className={styles.services}>
-                  <div className={styles.serviceName}>
-                    <img src={booking.serviceIcon} alt="" />
-                    <p>{booking.serviceName}</p>
-                  </div>
-                </div>
-              </td>
-              <td>{booking.carType}</td>
-              <td>{booking.startDate}</td>
-              <td>{booking.endDate}</td>
-              <td>{renderStatusComponent(booking.status)}</td>
-              <td></td>
+      <div className={styles.tableWrapper}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th className={styles.idColumn}>
+                <input
+                  className={styles.checkBox}
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={handleSelectAll}
+                />
+                ID
+              </th>
+              <th>Service Name</th>
+              <th>Car Owner</th>
+              <th>Car Type</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Status</th>
+              <th className={styles.addColumn}>+</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-
+          </thead>
+          <tbody>
+            {currentBookings.map((booking) => (
+              <tr
+                key={booking.id}
+                className={`${styles.clickableRow} ${selectedBookings.has(booking.id) ? styles.isSelected : ""}`}
+                onClick={() => setOpenBooking(booking)}
+              >
+                <td>
+                  <div className={styles.idColumn}>
+                    <input
+                      className={styles.checkBox}
+                      type="checkbox"
+                      checked={selectedBookings.has(booking.id)}
+                      onChange={() => {}}
+                      onClick={(e) => handleSelectBooking(booking.id, e)}
+                    />
+                    {booking.id}
+                  </div>
+                </td>
+                <td>
+                  <div className={styles.services}>
+                    <div className={styles.serviceName}>
+                      <img src={booking.serviceIcon} alt="" />
+                      <p>{booking.serviceName}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>{booking.name}</td>
+                <td>{booking.carType}</td>
+                <td>{booking.startDate}</td>
+                <td>{booking.endDate}</td>
+                <td>{renderStatusComponent(booking.status)}</td>
+                <td></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <ColumnSelectionBar></ColumnSelectionBar>
       <SelectionToolBar
         selectedCount={selectedBookings.size}
         onClearSelection={() => {

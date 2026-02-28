@@ -7,18 +7,18 @@
 }
 
 .inputContainer span {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 
 .formInput {
   width: 100%;
   border-radius: 3px;
-  padding: 0.7rem 1rem;
+  padding: 0.6rem 1rem;
   background-color: #e2e2e2;
-  border: 2px solid transparent; /* Add this line */
+  border: 2px solid transparent;
   transition: border-color 0.2s ease;
-  outline: none; /* Optional: removes default browser outline */
+  outline: none;
 }
 
 .formInput:focus {
@@ -26,5 +26,5 @@
 }
 
 .formInput::placeholder {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }

@@ -72,9 +72,9 @@ export default function DashboardBar() {
             />
             <DashboardItem
               icon={<RiNotification3Line />}
-              text="Notifications"
+              text="Inbox"
               isSelected={false}
-              onClick={() => handleNavigation("/en/notifications")}
+              onClick={() => handleNavigation("/en/inbox")}
             />
             <DashboardItem
               icon={<TbBrandGoogleAnalytics />}

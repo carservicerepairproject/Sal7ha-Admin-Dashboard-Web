@@ -6,10 +6,16 @@ import { FiPhone } from "react-icons/fi";
 
 interface PhoneNumberInputProps {
   className?: string;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
-const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({ className }) => {
-  const [phone, setPhone] = useState<string>("");
+const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
+  className,
+  value,
+  onChange,
+}) => {
+  const [phone, setPhone] = useState<string>(value ?? "");
 
   return (
     <div className={`${styles.phoneNumberInputContainer} ${className || ""}`}>
@@ -22,7 +28,10 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({ className }) => {
         <PhoneInput
           defaultCountry="eg"
           value={phone}
-          onChange={(value) => setPhone(value)}
+          onChange={(value) => {
+            setPhone(value);
+            onChange?.(value);
+          }}
           className={styles.phoneInput}
           inputClassName={styles.inputField}
         />

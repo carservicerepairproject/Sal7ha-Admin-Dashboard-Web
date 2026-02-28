@@ -11,9 +11,11 @@ import { PasswordChecklist, Validation } from "@/validation/validation";
 import { authSchema } from "@/validation/schema";
 import z from "zod";
 import { useRouter } from "next/navigation";
+import { useBusinessSignUp } from "@/infrastructure/context/business-signup.context";
 
-export default function signUpView() {
+export default function SignUpView() {
   const router = useRouter();
+  const { setData } = useBusinessSignUp();
   // Form state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +24,7 @@ export default function signUpView() {
 
   const checkList = React.useMemo<PasswordChecklist>(
     () => Validation.passwordChecklist(password),
-    [password]
+    [password],
   );
 
   type RequirementItem = { ok: boolean; text: string };
@@ -40,6 +42,9 @@ export default function signUpView() {
 
     try {
       authSchema.parse({ email, password, rememberMe });
+      setData({ email, password });
+      console.log("saved:", { email, password });
+      router.push("sign-up/form");
     } catch (err) {
       if (err instanceof z.ZodError) {
         setError(err.issues[0]?.message ?? "Validation Error");
@@ -51,7 +56,7 @@ export default function signUpView() {
 
   return (
     <div className={styles.authContainer}>
-      <form className={styles.authForm} noValidate>
+      <form className={styles.authForm} noValidate onSubmit={handleSubmit}>
         <label className={styles.authFormLabel}>SIGN UP</label>
         <div className={styles.authFormContent}>
           {error && <ErrorAlert message={error} />}

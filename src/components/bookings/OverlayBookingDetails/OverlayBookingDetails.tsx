@@ -104,7 +104,6 @@ export default function OverlayBookingDetails({
 
           {/* Services Section */}
           <div className={styles.bookingContentSection}>
-            <span className={styles.title}>Services</span>
             <table className={styles.serviceTable}>
               <thead>
                 <tr>
@@ -139,7 +138,7 @@ export default function OverlayBookingDetails({
               <textarea
                 id="message"
                 name="message"
-                rows={5}
+                rows={2}
                 placeholder="Add a note here"
               ></textarea>
             </div>

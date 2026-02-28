@@ -14,17 +14,10 @@ import TableView from "@/components/bookings/TableView/TableView";
 import ListView from "@/components/bookings/ListView/ListView";
 import DropdownButton from "@/components/common/DropdownButton/DropdownButton";
 import { DropdownOption } from "@/components/common/DropdownButton/DropdownButton";
-import OverlayBookingDetails from "@/components/bookings/OverlayBookingDetails/OverlayBookingDetails";
-
-interface Booking {
-  id: string;
-  serviceName: string;
-  serviceIcon: string;
-  carType: string;
-  startDate: string;
-  endDate: string;
-  status: string;
-}
+import { FaRegClock } from "react-icons/fa";
+import { TbStatusChange } from "react-icons/tb";
+import Booking from "@/domain/entities/Booking";
+import { BookingsRepository } from "@/domain/repositories/BookingsRepository";
 
 const VIEW_OPTIONS: DropdownOption[] = [
   { label: "Table View", icon: <HiOutlineTableCells /> },
@@ -34,69 +27,31 @@ const VIEW_OPTIONS: DropdownOption[] = [
 
 const FILTER_OPTIONS: DropdownOption[] = [
   { label: "Alphabetically", icon: <FaSortAlphaDown /> },
+  { label: "Status", icon: <TbStatusChange /> },
 ];
 
 const SORT_OPTIONS: DropdownOption[] = [
-  { label: "Ascending", icon: <FaSortAmountDown /> },
+  {
+    label: "Price",
+    icon: <FaSortAmountDown />,
+    submenu: [
+      { label: "Price: Ascending", icon: <FaSortAmountDown /> },
+      { label: "Price: Descending", icon: <FaSortAmountDown /> },
+    ],
+  },
+  {
+    label: "Time",
+    icon: <FaRegClock />,
+    submenu: [
+      { label: "Time: Early", icon: <FaRegClock /> },
+      { label: "Time: Late", icon: <FaRegClock /> },
+    ],
+  },
 ];
-
-const generateMockData = (): Booking[] => {
-  const services = [
-    {
-      name: "Engine Diagnostics & Checkup",
-      icon: "/assets/engine_service.svg",
-    },
-    {
-      name: "Oil Change & Filter Replacement",
-      icon: "/assets/engine_service.svg",
-    },
-    { name: "Brake Inspection & Repair", icon: "/assets/engine_service.svg" },
-    { name: "Tire Rotation & Alignment", icon: "/assets/engine_service.svg" },
-    { name: "AC System Service", icon: "/assets/engine_service.svg" },
-    { name: "Battery Check & Replacement", icon: "/assets/engine_service.svg" },
-    { name: "Transmission Service", icon: "/assets/engine_service.svg" },
-  ];
-
-  const carTypes = [
-    "Nissan",
-    "Toyota",
-    "Honda",
-    "BMW",
-    "Mercedes",
-    "Audi",
-    "Ford",
-  ];
-  const statuses = ["In-Progress", "Completed", "Pending", "Cancelled"];
-  const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
-  const bookings: Booking[] = [];
-
-  for (let i = 1; i <= 25; i++) {
-    const service = services[Math.floor(Math.random() * services.length)];
-    const carType = carTypes[Math.floor(Math.random() * carTypes.length)];
-    const status = statuses[Math.floor(Math.random() * statuses.length)];
-    const startDay = days[Math.floor(Math.random() * days.length)];
-    const endDay = days[Math.floor(Math.random() * days.length)];
-    const startDayNum = Math.floor(Math.random() * 28) + 1;
-    const endDayNum = startDayNum + Math.floor(Math.random() * 3) + 1;
-
-    bookings.push({
-      id: Math.random().toString(36).substring(2, 8).toUpperCase(),
-      serviceName: service.name,
-      serviceIcon: service.icon,
-      carType,
-      startDate: `${startDay} ${startDayNum}`,
-      endDate: `${endDay} ${endDayNum}`,
-      status,
-    });
-  }
-
-  return bookings;
-};
 
 export default function BookingsView() {
   const [showStats, setShowStats] = useState(false);
-  const [bookings] = useState<Booking[]>(generateMockData());
+  const [bookings] = useState<Booking[]>(BookingsRepository.generateMockData());
   const [selectedView, setSelectedView] = useState<DropdownOption>(
     VIEW_OPTIONS[0],
   );
@@ -106,13 +61,22 @@ export default function BookingsView() {
   const [selectedSort, setSelectedSort] = useState<DropdownOption>(
     SORT_OPTIONS[0],
   );
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const processedBookings = BookingsRepository.search(
+    BookingsRepository.sort(
+      BookingsRepository.filter(bookings, selectedFilter.label),
+      selectedSort.label,
+    ),
+    searchQuery,
+  );
 
   const renderView = () => {
     switch (selectedView.label) {
       case "Table View":
-        return <TableView bookings={bookings} />;
+        return <TableView bookings={processedBookings} />;
       case "List View":
-        return <ListView bookings={bookings} />;
+        return <ListView bookings={processedBookings} />;
       default:
         return null;
     }
@@ -159,7 +123,12 @@ export default function BookingsView() {
         <div className={styles.toolsRight}>
           <div className={styles.searchBar}>
             <RiSearch2Line />
-            <input type="text" placeholder="Search For A Client" />
+            <input
+              type="text"
+              placeholder="Search For A Client"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
           <div className={styles.separator} />
           <div className={styles.actionButton}>
