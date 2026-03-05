@@ -1,0 +1,23 @@
+.formButton {
+  background-color: var(--selective-yellow);
+  padding: 0.65rem 9rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .formButton {
+    padding: 0.75rem 4rem; /* smaller on iPad */
+  }
+}
+
+@media (max-width: 480px) {
+  .formButton {
+    padding: 0.75rem 1.5rem; /* small enough for phones */
+    width: 100%;
+    max-width: 420px; /* still centered */
+  }
+}
