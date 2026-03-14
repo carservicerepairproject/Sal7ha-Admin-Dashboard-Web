@@ -1,6 +1,14 @@
 import React from "react";
 import styles from "./FormButton.module.css";
 
-export default function FormButton() {
-  return <button className = {styles.formButton}>Continue</button>;
+interface FormButtonProps {
+  onClick: () => void;
+}
+
+export default function FormButton({ onClick }: FormButtonProps) {
+  return (
+    <button className={styles.formButton} onClick={onClick}>
+      Continue
+    </button>
+  );
 }

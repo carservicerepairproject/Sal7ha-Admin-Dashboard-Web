@@ -86,13 +86,10 @@
   font-weight: 600;
 }
 
-
 @media (max-width: 1024px) {
   .stepper {
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
+    align-items: flex-start;
     width: 100%;
     padding: 1rem;
   }
@@ -103,24 +100,34 @@
     flex: 1;
   }
 
+  .stepItemActive {
+    flex: 2;
+  }
+
   .stepTrack {
     flex-direction: row;
     align-items: center;
+    width: 100%;
   }
 
   .connector {
-    width: 100%;
+    flex: 1;
     height: 0.2rem;
     margin: 0 0.4rem;
   }
 
   .stepLabel {
-    text-align: center;
-    padding-top: 0;
+    text-align: start;
+    padding-top: 0rem;
+    white-space: nowrap;
+    margin-left: -2.5rem;
+  }
+
+  .stepLabel:not(.stepLabelActive) {
+    display: none;
   }
 }
 
-/* Phones: smaller labels */
 @media (max-width: 480px) {
   .stepLabel {
     font-size: 0.65rem;

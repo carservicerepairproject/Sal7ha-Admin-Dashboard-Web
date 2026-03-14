@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ProgressBar.module.css";
-import { STEPS } from "@/app/[locale]/form/steps";
+import { STEPS } from "@/app/[locale]/onboarding/steps";
 
 export default function ProgressBar({ currentStep }: { currentStep: number }) {
   return (
@@ -10,7 +10,10 @@ export default function ProgressBar({ currentStep }: { currentStep: number }) {
         const active = index !== 0 && index === currentStep;
 
         return (
-          <div key={step.key} className={styles.stepItem}>
+          <div
+            key={step.key}
+            className={`${styles.stepItem} ${active ? styles.stepItemActive : ""}`}
+          >
             <div className={styles.stepTrack}>
               <div
                 className={`${styles.progressCircle} ${
@@ -18,7 +21,7 @@ export default function ProgressBar({ currentStep }: { currentStep: number }) {
                 } ${active ? styles.active : ""}`}
               >
                 {completed && (
-                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                  <svg width="20" height="8" viewBox="0 0 10 8" fill="none">
                     <path
                       d="M1 4L3.5 6.5L9 1"
                       stroke="currentColor"
@@ -38,7 +41,6 @@ export default function ProgressBar({ currentStep }: { currentStep: number }) {
                 />
               )}
             </div>
-
             <span
               className={`${styles.stepLabel} ${
                 active ? styles.stepLabelActive : ""

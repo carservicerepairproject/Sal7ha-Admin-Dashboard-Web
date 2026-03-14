@@ -23,9 +23,15 @@
   flex-wrap: wrap;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
+
+}
+
+@media (max-width: 480px) {
   .row {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
   }
 }
+

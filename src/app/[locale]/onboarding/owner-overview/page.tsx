@@ -4,65 +4,55 @@ import React, { useState } from "react";
 import FormRow from "@/components/form/FormRow/FormRow";
 import Field from "@/components/form/Field/Field";
 import SelectField from "../../../../components/form/SelectField/SelectField";
-import TextareaField from "@/components/form/TextareaField/TextareaField";
-import ChoiceList from "@/components/form/ChoiceList/ChoiceList";
 import ChoiceBox from "../../../../components/form/ChoiceBox/ChoiceBox";
-import { FaUser, FaUsers } from "react-icons/fa";
-import styles from "./BusinessOverview.module.css";
-import FormButton from "../../../../components/form/FormButton/FormButton";
+import { IoMale, IoFemaleSharp } from "react-icons/io5";
 
-export default function BusinessOverviewView() {
+import styles from "./OwnerOverview.module.css";
+import FormButton from "../../../../components/form/FormButton/FormButton";
+import { getNextHref } from "../steps";
+import { useRouter } from "next/navigation";
+
+export default function OwnerOverviewView() {
   const [businessType, setBusinessType] = useState("service");
   const [numberOfEmployees, setNumberOfEmployees] = useState("store");
+  const router = useRouter();
 
   return (
     <section className={styles.level}>
-      <h1>About your business</h1>
+      <h1>About Owner</h1>
 
       <div className={styles.content}>
-        {/* Business Name Row */}
-        <FormRow label="Your business name">
-          <Field span={12} type="text" placeholder="Text Input" />
+        {/* First Name Row */}
+        <FormRow label="First name">
+          <Field span={12} type="text" placeholder="Ex: John" />
         </FormRow>
-        {/* Description Textarea Row */}
-        <FormRow label="Description of business conducted">
-          <TextareaField span={12} placeholder="Describe your business..." />
+        {/* Last Name Row */}
+        <FormRow label="Last name">
+          <Field span={12} type="text" placeholder="Ex: Doe" />
         </FormRow>
-
-        {/* Business Type Choice List Row */}
-        <FormRow label="Business type">
-          <ChoiceList
-            span={12}
-            name="type"
-            value={businessType}
-            onChange={setBusinessType}
-            options={[
-              { value: "a", label: "Option A" },
-              { value: "b", label: "Option B" },
-              { value: "c", label: "Option C" },
-            ]}
-          />
+        {/* Personal Email Row */}
+        <FormRow label="Personal email">
+          <Field span={12} type="text" placeholder="Ex: example@gmail.com" />
         </FormRow>
 
-        {/*  */}
-        <FormRow label="Number Of Employees" layout="horizontal">
+        {/*  Gender*/}
+        <FormRow label="Gender" layout="horizontal">
           <ChoiceBox
             value={numberOfEmployees}
             onChange={setNumberOfEmployees}
             options={[
-              { value: "1-10", label: "1-10", icon: <FaUser size={20} /> },
-              { value: "11-20", label: "11-20", icon: <FaUsers size={20} /> },
+              { value: "Male", label: "Male", icon: <IoMale size={20} /> },
               {
-                value: "20+",
-                label: "20+",
-                icon: <FaUsers size={20} />,
+                value: "Female",
+                label: "Female",
+                icon: <IoFemaleSharp size={20} />,
               },
             ]}
           />
         </FormRow>
 
-        {/* Business Address Row */}
-        <FormRow label="Business Address">
+        {/* Personal Address Row */}
+        <FormRow label="Personal Address">
           {/* row 1 */}
           <SelectField span={12} defaultValue="">
             <option value="" disabled>
@@ -85,7 +75,11 @@ export default function BusinessOverviewView() {
       </div>
       <div className={styles.separator} />
       <div className={styles.centerWrapper}>
-        <FormButton></FormButton>
+        <FormButton
+          onClick={() =>
+            router.push(getNextHref("/onboarding/owner-overview"))
+          }
+        ></FormButton>
       </div>
     </section>
   );
